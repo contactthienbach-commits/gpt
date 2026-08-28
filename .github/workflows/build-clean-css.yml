@@ -1,0 +1,37 @@
+name: Build clean CSS
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Minify and consolidate CSS
+        run: |
+          npx --yes clean-css-cli@5 -O2 --format keep-breaks --output thienbach-clean.css thienbach.css
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('thienbach-clean.css')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('DM Sans:400,500|Jost:400,500,600,700', 'Jost:400,500,600,700')
+          s = s.replace('"DM Sans"', '"Jost"').replace("'DM Sans'", "'Jost'")
+          # Preserve the two homepage sections the owner explicitly chose to hide.
+          s += '\n\n/* Homepage intentional section hides */\n.home .tb-trust { display:none !important; }\n.home .tb-final-cta { display:none !important; }\n'
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit cleaned CSS and remove temporary workflow
+        run: |
+          rm -f .github/workflows/build-clean-css.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add thienbach-clean.css .github/workflows/build-clean-css.yml
+          git commit -m 'Create consolidated clean CSS' || exit 0
+          git push
