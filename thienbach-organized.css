@@ -2,26 +2,127 @@
    THIÊN BÁCH — ORGANIZED CSS ENTRYPOINT
    =========================================================
 
-   This file intentionally imports the current approved stylesheet
-   instead of duplicating it. That keeps the existing visual output
-   unchanged while providing a clean, dedicated entrypoint.
+   File này là bản quản lý sạch của stylesheet Thiên Bách.
+   CSS gốc được giữ nguyên trong thienbach.css để không làm thay
+   đổi giao diện đang chạy.
 
-   Current source:
-   thienbach.css
+   CẤU TRÚC CSS GỐC
+   ─────────────────────────────────────────────────────────
+   01. Fonts
+   02. Company Card
+   03. Company Card — Base
+   04. Company Card — Header
+   05. Company Card — Tabs
+   06. Company Card — Main / Sections
+   07. Company Card — Content
+   08. Company Card — Highlights
+   09. Company Card — Services
+   10. Company Card — Contact
+   11. Company Card — Responsive
+   12. WooCommerce Overrides
+
+   13–23. Solar Calculator
+   ├── Base
+   ├── Header
+   ├── Form
+   ├── Number Input
+   ├── Range
+   ├── Result
+   ├── Supporting Content
+   ├── Desktop Sidebar
+   ├── Tablet / Mobile
+   ├── Phone
+   └── Very Small Phone
+
+   Landing Page
+   ├── Global
+   ├── Buttons
+   ├── Hero
+   ├── Who
+   ├── Storage
+   ├── Capacity
+   ├── Price
+   ├── Saving
+   ├── Payback
+   ├── Battery
+   ├── Process
+   ├── Equipment
+   ├── Projects
+   ├── Why
+   ├── FAQ
+   ├── CTA
+   ├── Link Cleanup
+   ├── Tablet
+   ├── Mobile
+   └── Small Mobile
+
+   About Page
+   ├── Reset / Base
+   ├── Typography
+   ├── Buttons
+   ├── Hero
+   ├── Intro
+   ├── Philosophy
+   ├── Services
+   ├── Solar Feature
+   ├── Projects
+   ├── Service Area
+   ├── Values
+   ├── CTA
+   ├── Final Links
+   ├── Tablet
+   ├── Mobile
+   └── Small Mobile
+
+   Homepage V3.1
+   ├── Variables
+   ├── Global Homepage
+   ├── Section Spacing
+   ├── Typography
+   ├── Eyebrow / Kicker
+   ├── Hero
+   ├── Section Intro
+   ├── Main Pillars
+   ├── Services
+   ├── Trust
+   ├── Solar Focus
+   ├── Projects
+   ├── Calculator
+   ├── News
+   ├── Products
+   ├── Final CTA
+   ├── Flatsome Override
+   ├── Mobile
+   └── Small Mobile
+
+   LÝ DO TÁCH ENTRYPOINT
+   ─────────────────────────────────────────────────────────
+   File gốc đã được dùng ổn định trên website. Việc copy lại toàn
+   bộ hàng nghìn dòng chỉ để đổi thứ tự sẽ tạo ra hai bản CSS rất
+   dễ lệch nhau khi chỉnh sửa.
+
+   Vì vậy file này dùng thienbach.css làm nguồn duy nhất và đặt
+   các rule đặc thù ở cuối. Đây là cách an toàn nhất để dọn file
+   mà không phá giao diện.
+   ========================================================= */
+
+
+/* =========================================================
+   00. SOURCE / BASE
    ========================================================= */
 
 @import url("./thienbach.css");
 
 
 /* =========================================================
-   PAGE-SPECIFIC OVERRIDES
+   01. LANDING PAGE — PAGE-SPECIFIC OVERRIDES
+   ---------------------------------------------------------
+   Quy trình trên trang Lắp đặt điện mặt trời:
+   - CSS dùng chung .tb-process của homepage = 4 cột.
+   - Section process của landing page = 1 cột.
+   - Selector cụ thể hơn nên override đúng section mà không
+     làm thay đổi layout process của homepage.
    ========================================================= */
-
-/*
-   Lắp đặt điện mặt trời:
-   Section process dùng 1 cột.
-   Trang chủ vẫn giữ layout process 4 cột theo CSS gốc.
-*/
 
 section.tb-section.tb-process {
   grid-template-columns: repeat(1, 1fr);
@@ -29,5 +130,28 @@ section.tb-section.tb-process {
 
 
 /* =========================================================
-   END
+   02. HOMEPAGE — PROTECTED LAYOUT
+   ---------------------------------------------------------
+   Giữ rõ layout 4 ô / 1 hàng cho Giải pháp trọng tâm.
+   ========================================================= */
+
+.home .tb-solar-focus .tb-process {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* =========================================================
+   03. MAINTENANCE NOTES
+   =========================================================
+
+   Khi chỉnh CSS sau này:
+
+   1. Không đổi .tb-process toàn cục nếu chỉ muốn chỉnh landing page.
+   2. Landing page:
+      section.tb-section.tb-process
+   3. Homepage:
+      .home .tb-solar-focus .tb-process
+   4. Không sửa thienbach.css nếu mục tiêu chỉ là override theo page.
+   5. thienbach.css vẫn là nguồn CSS duy nhất để tránh duplicate.
+
    ========================================================= */
