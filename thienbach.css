@@ -7090,10 +7090,11 @@ input[type="range"]::-moz-range-thumb {
 .tb-process {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-
     gap: 8px;
-
     margin: 25px 0 27px;
+}
+section.tb-section.tb-process {
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .tb-process > div {
