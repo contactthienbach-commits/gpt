@@ -6961,7 +6961,33 @@ input[type="range"]::-moz-range-thumb {
 
     color: var(--tb-orange);
 }
+/* =========================================================
+   SERVICES GRID
+========================================================= */
 
+.tb-services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tb-services-grid .tb-service-card {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SERVICES - MOBILE
+========================================================= */
+
+@media (max-width: 849px) {
+
+    .tb-services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+}
 
 /* =========================================================
    09. TRUST
