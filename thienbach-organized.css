@@ -1,0 +1,33 @@
+/* =========================================================
+   THIÊN BÁCH — ORGANIZED CSS ENTRYPOINT
+   =========================================================
+
+   This file intentionally imports the current approved stylesheet
+   instead of duplicating it. That keeps the existing visual output
+   unchanged while providing a clean, dedicated entrypoint.
+
+   Current source:
+   thienbach.css
+   ========================================================= */
+
+@import url("./thienbach.css");
+
+
+/* =========================================================
+   PAGE-SPECIFIC OVERRIDES
+   ========================================================= */
+
+/*
+   Lắp đặt điện mặt trời:
+   Section process dùng 1 cột.
+   Trang chủ vẫn giữ layout process 4 cột theo CSS gốc.
+*/
+
+section.tb-section.tb-process {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+
+/* =========================================================
+   END
+   ========================================================= */
